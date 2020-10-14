@@ -7,7 +7,7 @@
 .vscode\launch.json
 # testing
 /coverage
-
+.env
 # production
 /build
 

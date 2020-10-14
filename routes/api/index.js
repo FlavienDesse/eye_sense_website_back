@@ -1,8 +1,8 @@
 let express = require('express')
 let router = express.Router();
 
-let api = require('./api/index')
+let photos = require('./categories/index')
 
-router.use('/api',api)
+router.use('/photos',photos)
 
 module.exports = router
