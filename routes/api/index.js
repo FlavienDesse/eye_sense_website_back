@@ -3,6 +3,6 @@ let router = express.Router();
 
 let photos = require('./categories/index')
 
-router.use('/photos',photos)
+router.use('/categories',photos)
 
 module.exports = router
