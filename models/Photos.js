@@ -9,7 +9,6 @@ const photosSchema = new Schema(
         creationDate: {
             type: Date,
             default: Date.now,
-            required: true
         },
         name: {
             type: "String",
