@@ -31,7 +31,7 @@ module.exports = function (req, res, next) {
                         } else {
                             doc.forEach(item => allPhotoId.push(item._id));
                             for (let i = 0; i < allPhotoId.length; i++) {
-                                fs.appendFileSync('Img/' + allPhotoId[i], req.body.allImg[i].src.split(';base64,').pop(), 'base64', function (err) {
+                                fs.appendFileSync('Img/' + allPhotoId[i], req.body.allImg[i].src, 'base64', function (err) {
                                     if (err) {
                                         error = true;
                                         for (let a = 0; a < i - 1; a++) {
