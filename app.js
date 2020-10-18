@@ -9,6 +9,7 @@ app.use(cors({
     origin:true,
     credentials:true,
 }))
+global.appRoot = path.resolve(__dirname);
 var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
