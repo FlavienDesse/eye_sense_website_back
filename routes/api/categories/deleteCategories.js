@@ -2,9 +2,9 @@ let Category = require('../../../models/Category')
 let Photos = require('../../../models/Photos')
 var ObjectId = require("mongoose").Types.ObjectId;
 
-function deleteOnePhotos(id){
+async function deleteOnePhotos(id,res){
     let error = false
-    Photos.findOneAndDelete({_id:id},function (err,doc){
+    await Photos.findOneAndDelete({_id:id},function (err,doc){
         if(err){
             res.status(402).json({
                 message: err
@@ -20,9 +20,11 @@ function deleteOnePhotos(id){
     return error
 }
 
-function deleteOneCategory(id){
+async function deleteOneCategory(id,res){
     let error = false
-    Category.findOneAndDelete({_id:id},function (err,doc){
+    await Category.findOneAndDelete({_id:id},function (err,doc){
+        console.log(doc)
+        console.log(err)
         if(err){
             res.status(402).json({
                 message: err
@@ -31,7 +33,7 @@ function deleteOneCategory(id){
         }
         else if(doc){
             for (let i = 0 ; i<doc.allPhotos.length ; i++){
-                if(deleteOnePhotos(doc.allPhotos[i])){
+                if(deleteOnePhotos(doc.allPhotos[i],res)){
                     error=true;
                     break;
                 }
@@ -45,6 +47,8 @@ function deleteOneCategory(id){
         }
 
     })
+    console.log(error)
+
     return error
 }
 
@@ -59,7 +63,7 @@ module.exports=function (req,res){
     }
     else{
         for (let i = 0 ; i<req.body.arrayId.length ; i++){
-            if(deleteOneCategory(req.body.arrayId[i])){
+            if(deleteOneCategory(req.body.arrayId[i],res)){
                 return
             }
         }
