@@ -41,7 +41,7 @@ async function deleteOneCategory(id,res){
         }
         else {
             res.status(402).json({
-                message: "No id finded"
+                message: "No id found"
             })
             error = true
         }
