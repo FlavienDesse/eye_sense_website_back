@@ -4,25 +4,26 @@ var ObjectId = require("mongoose").Types.ObjectId;
 
 async function deleteOnePhotos(id,res){
     let error = false
-    await Photos.findOneAndDelete({_id:id},function (err,doc){
-        if(err){
+    await Photos.findOneAndDelete({_id: id}, function (err, doc) {
+        if (err) {
             res.status(402).json({
                 message: err
             })
             error = true
-        }
-        else {
+        } else {
             fs.unlinkSync('Img/' + id, function (err) {
 
             });
         }
-    })
+        return error
+    });
     return error
+
 }
 
 async function deleteOneCategory(id,res){
     let error = false
-    await Category.findOneAndDelete({_id:id},function (err,doc){
+    await Category.findOneAndDelete({_id:id},async function (err,doc){
         console.log(doc)
         console.log(err)
         if(err){
@@ -33,29 +34,30 @@ async function deleteOneCategory(id,res){
         }
         else if(doc){
             for (let i = 0 ; i<doc.allPhotos.length ; i++){
-                if(deleteOnePhotos(doc.allPhotos[i],res)){
+                if(await deleteOnePhotos(doc.allPhotos[i],res)){
                     error=true;
                     break;
                 }
             }
         }
         else {
+            console.log("lo")
             res.status(402).json({
-                message: "No id found"
+                message: {message:"No categories find with the provided id"}
             })
             error = true
         }
-
+        return error
     })
-    console.log(error)
-
     return error
 }
 
 
-module.exports=function (req,res){
+module.exports=async function (req,res){
     //"arrayId":["po"]
-
+    console.log("")
+    console.log(req.body)
+    let error = false
     if (req.body.arrayId === undefined || req.body.arrayId.length === 0 || !req.body.arrayId.every(i => ObjectId.isValid(i)) ){
         res.status(402).json({
             message: {message: 'Error please precise a correct array of id'}
@@ -63,12 +65,15 @@ module.exports=function (req,res){
     }
     else{
         for (let i = 0 ; i<req.body.arrayId.length ; i++){
-            if(deleteOneCategory(req.body.arrayId[i],res)){
-                return
+            if(await deleteOneCategory(req.body.arrayId[i],res)){
+                error = true
             }
         }
-        res.status(200).json({
-            message: {message: 'Success'}
-        })
+        if(!error){
+            res.status(200).json({
+                message: {message: 'Success'}
+            })
+        }
+
     }
 }
