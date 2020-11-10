@@ -36,7 +36,12 @@ function deleteOneCategory(id){
                     break;
                 }
             }
-
+        }
+        else {
+            res.status(402).json({
+                message: "No id finded"
+            })
+            error = true
         }
 
     })
