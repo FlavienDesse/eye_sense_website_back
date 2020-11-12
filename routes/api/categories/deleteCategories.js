@@ -24,8 +24,6 @@ async function deleteOnePhotos(id,res){
 async function deleteOneCategory(id,res){
     let error = false
     await Category.findOneAndDelete({_id:id},async function (err,doc){
-        console.log(doc)
-        console.log(err)
         if(err){
             res.status(402).json({
                 message: err
@@ -41,7 +39,6 @@ async function deleteOneCategory(id,res){
             }
         }
         else {
-            console.log("lo")
             res.status(402).json({
                 message: {message:"No categories find with the provided id"}
             })
@@ -55,8 +52,7 @@ async function deleteOneCategory(id,res){
 
 module.exports=async function (req,res){
     //"arrayId":["po"]
-    console.log("")
-    console.log(req.body)
+
     let error = false
     if (req.body.arrayId === undefined || req.body.arrayId.length === 0 || !req.body.arrayId.every(i => ObjectId.isValid(i)) ){
         res.status(402).json({
