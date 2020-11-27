@@ -4,7 +4,7 @@ require('dotenv').config()
 const http = require('./http.js')
 const socket = require("socket.io")
 const mongoose = require("mongoose");
-let io = socket(http)
+let io = socket(http,{pingTimeout: 60000})
 
 mongoose.connect("mongodb+srv://"
     + process.env.DATABASE_USER
@@ -20,17 +20,36 @@ mongoose.connect("mongodb+srv://"
 });
 
 
+io.on("connection",socketIO)
 
 
 
-io.on("connection", socketIO)
 
-function socketIO(socket) {
-    console.log("suis connecté woolah")
+var socketUnity;
+const websiteNamespace = io.of("/websiteNamespace")
+
+websiteNamespace.on('connection', socket => {
+    console.log("New website connected , id :" + socket.id);
+    socket.on('start test', (res) => {
+        //console.log(socketUnity)
+        socketUnity.emit('start',"lol")
+
+    });
+});
+
+
+
+
+async function socketIO(socket){
+
+    if(socket.handshake.query.unity){
+        console.log("New unity connected , id :" + socket.id);
+        socketUnity = socket
+    }
+
+
+
 }
-
-
-
 
 
 
