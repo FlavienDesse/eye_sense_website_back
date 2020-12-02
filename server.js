@@ -30,6 +30,9 @@ const websiteNamespace = io.of("/websiteNamespace")
 
 websiteNamespace.on('connection', socket => {
     console.log("New website connected , id :" + socket.id);
+    socket.on('send user data', (res) => {
+        socketUnity.emit('get user data', res)
+    })
     socket.on('send photos', (res) => {
         //console.log(socketUnity)
         socketUnity.emit('get photos', res)
