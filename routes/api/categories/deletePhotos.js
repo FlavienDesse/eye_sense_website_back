@@ -24,11 +24,13 @@ module.exports=async function (req,res){
                 error = true
             }
             else {
-                fs.unlinkSync('Img/' + req.body.idImage, function (err) {
-                    if (err) {
-                        error = true
-                    }
-                });
+                if( fs.existsSync('Img/' + req.body.idImage)){
+                    fs.unlinkSync('Img/' + req.body.idImage, function (err) {
+                        if (err) {
+                            error = true
+                        }
+                    });
+                }
                 Category.findOne({_id: req.body.idCategory},async function (err,doc) {
                     if(err){
                         res.status(402).json({
