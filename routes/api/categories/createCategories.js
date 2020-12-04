@@ -20,7 +20,7 @@ module.exports = function (req, res, next) {
                 })
             } else {
                 if (req.body.allImg.length !== 0) {
-                    if (req.body.allImg.length < 6) {
+                    if (req.body.allImg.length <= 6) {
                         var error = false;
                         var allPhotoId = []
                         Photos.insertMany(req.body.allImg, function (err, doc) {

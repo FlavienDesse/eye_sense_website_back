@@ -15,7 +15,7 @@ module.exports = async function (req, res) {
                 })
             } else if (doc) {
                 if (req.body.allImg.length !== 0) {
-                    if(doc.allPhotos.length <6){
+                    if(doc.allPhotos.length <=6){
                         var error = false;
                         var allPhotoId = []
                         Photos.insertMany(req.body.allImg, async function (err, doc) {
