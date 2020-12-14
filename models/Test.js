@@ -7,7 +7,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 const testSchema = new Schema(
     {
-        creationDate: {
+        creation_date: {
             type: Date,
             default: Date.now,
         },
@@ -27,6 +27,15 @@ const testSchema = new Schema(
         time_look:{
           type:Array,
         },
+        screen_size:{
+            width : {
+                type:Number
+            },
+            height : {
+                type:Number
+            }
+        }
+
     },
 );
 
