@@ -14,7 +14,7 @@ mongoose.connect("mongodb+srv://"
     + process.env.DATABASE_PASSWORD
     + "@"
     + process.env.DATABASE_DOMAIN,
-    {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}
+    {useCreateIndex: true,useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}
 ).then(function(){
     console.log("Connected to Database");
 }).catch(function(error){
