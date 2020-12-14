@@ -34,8 +34,10 @@ const testSchema = new Schema(
             height : {
                 type:Number
             }
-        }
-
+        },
+        photos_info:{
+            type:Array,
+        },
     },
 );
 
