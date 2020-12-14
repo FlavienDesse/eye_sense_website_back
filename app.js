@@ -28,7 +28,9 @@ var indexRouter = require('./routes/index')
 
 app.use('/', indexRouter);
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+});
 
 
 module.exports = app;

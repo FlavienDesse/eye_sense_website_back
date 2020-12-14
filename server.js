@@ -6,6 +6,8 @@ const socket = require("socket.io")
 const mongoose = require("mongoose");
 let io = socket(http,{pingTimeout: 60000})
 
+
+
 mongoose.connect("mongodb+srv://"
     + process.env.DATABASE_USER
     + ":"
