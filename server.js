@@ -36,7 +36,7 @@ websiteNamespace.on('connection', socket => {
         socketUnity.emit('get user data', res)
     })
     socket.on('send photos', (res) => {
-        //console.log(socketUnity)
+
         socketUnity.emit('get photos', res)
     })
     socket.on('test finished', (res) => {
