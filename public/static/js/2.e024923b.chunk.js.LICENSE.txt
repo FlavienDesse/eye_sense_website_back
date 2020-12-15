@@ -21,6 +21,21 @@ object-assign
  * @license MIT
  */
 
+/**
+ * index.ts
+ *
+ * @description Rainbowvis.js main file. Many of the methods/functions have
+ * multiple aliases and/or do very similar things, this was to maintain
+ * backwards-compatibility with the original API while porting to Typescript
+ * and adapting it for our needs at INDOT. Same for the mixed use of the
+ * American 'color' and British 'colour'.
+ *
+ * INDOT Typescript port/refactor by Jared Smith jarsmith@indot.in.gov
+ *
+ * @author Sophiah Ho
+ * @license EPL v1
+ */
+
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
@@ -81,3 +96,7 @@ object-assign
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+//! moment.js
+
+//! moment.js locale configuration
